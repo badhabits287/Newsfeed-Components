@@ -112,3 +112,90 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// const CreateData= (title,date, Paragraph) => {
+  
+// // <div class="article">
+//   //   <h2>{title of the article}</h2>
+//   //   <p class="date">{date of the article}</p>
+
+//   //   {three separate paragraph elements}
+
+//   //   <span class='expandButton'></span>
+//   // </div>
+//   // define new elements
+// const article = document.createElement('div');
+//  const articleDiv = document.createElement('div');
+//  const header = document.createElement('h2');
+//  const articleDate = document.createElement('date')
+//  const articlesBdy = document.createElement ('div');
+//  const firstP = document.createElement('p');
+//  const secondP = document.createElement('p');
+//  const thirdP = document.createElement('p');
+//  const articleButton = document.createElement('div');
+//  const btnOpen = document.createElement('button');
+//  const btnClose = document.createElement('button');
+//  header.textContent = data.title;
+//  firstP.textContent =data.firstParagraph;
+//  secondP.textContent =data.secondParagraph;
+//  thirdP.textContent =data.thirdParagraph;
+ 
+//  // Start appending stuff
+
+//  article.appendChild(articleDiv);
+//  articleDiv.appendChild(header);
+//  articleDiv.appendChild(articleDate);
+
+// articlesBdy.appendChild(firstP);
+// articlesBdy.appendChild(secondP);
+// articlesBdy.appendChild(thirdP);
+
+// articleButton.appendChild(btnOpen);
+// articleButton.appendChild(btnClose);
+
+
+//  //classes
+//  articleDiv.classList.add("articles");
+//  articleDate.classList.add('date');
+//  articleButton.classList.add('expandButton');
+
+//  return card
+// }
+function articleCreator(x){
+  let article = document.createElement("div");
+  let title = document.createElement("h2");
+  let date = document.createElement("p");
+  let p1 = document.createElement("p");
+  let p2 = document.createElement("p");
+  let p3 = document.createElement("p");
+  let expandButton = document.createElement("span");
+
+  article.classList.add("article");
+  date.classList.add("date");
+  expandButton.classList.add("expandButton");
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(expandButton);
+
+  title.textContent = x.title;
+  date.textContent = x.date;
+  p1.textContent = x.firstParagraph;
+  p2.textContent = x.secondParagraph;
+  p3.textContent = x.thirdParagraph;
+  expandButton.textContent = "click";
+
+  expandButton.addEventListener("click", () => {
+    article.classList.toggle("article-open");
+  })
+
+  return article;
+}
+
+const articles = document.querySelector(".articles");
+data.forEach( x => {articles.appendChild(articleCreator(x))})
+
+
