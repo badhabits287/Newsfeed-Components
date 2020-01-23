@@ -114,7 +114,7 @@ const data = [
 */
 
 // const CreateData= (title,date, Paragraph) => {
-  
+
 // // <div class="article">
 //   //   <h2>{title of the article}</h2>
 //   //   <p class="date">{date of the article}</p>
@@ -123,79 +123,83 @@ const data = [
 
 //   //   <span class='expandButton'></span>
 //   // </div>
-//   // define new elements
-// const article = document.createElement('div');
-//  const articleDiv = document.createElement('div');
-//  const header = document.createElement('h2');
-//  const articleDate = document.createElement('date')
-//  const articlesBdy = document.createElement ('div');
-//  const firstP = document.createElement('p');
-//  const secondP = document.createElement('p');
-//  const thirdP = document.createElement('p');
-//  const articleButton = document.createElement('div');
-//  const btnOpen = document.createElement('button');
-//  const btnClose = document.createElement('button');
-//  header.textContent = data.title;
-//  firstP.textContent =data.firstParagraph;
-//  secondP.textContent =data.secondParagraph;
-//  thirdP.textContent =data.thirdParagraph;
- 
-//  // Start appending stuff
-
-//  article.appendChild(articleDiv);
-//  articleDiv.appendChild(header);
-//  articleDiv.appendChild(articleDate);
-
-// articlesBdy.appendChild(firstP);
-// articlesBdy.appendChild(secondP);
-// articlesBdy.appendChild(thirdP);
-
-// articleButton.appendChild(btnOpen);
-// articleButton.appendChild(btnClose);
 
 
-//  //classes
-//  articleDiv.classList.add("articles");
-//  articleDate.classList.add('date');
-//  articleButton.classList.add('expandButton');
 
-//  return card
-// }
-function articleCreator(x){
-  let article = document.createElement("div");
-  let title = document.createElement("h2");
-  let date = document.createElement("p");
-  let p1 = document.createElement("p");
-  let p2 = document.createElement("p");
-  let p3 = document.createElement("p");
-  let expandButton = document.createElement("span");
+function articleCreator(articleInfo) {
+  // 1-  def new elements
+  const article = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
+  const buttonExpand = document.createElement("span");
+  const buttonCollapse = document.createElement("span");
 
+  // 2-   class names
   article.classList.add("article");
-  date.classList.add("date");
-  expandButton.classList.add("expandButton");
+  articleDate.classList.add("date");
+  buttonExpand.classList.add("expandButton");
+  buttonCollapse.classList.add("collapseButton", "hide-btn");
 
-  article.appendChild(title);
-  article.appendChild(date);
-  article.appendChild(p1);
-  article.appendChild(p2);
-  article.appendChild(p3);
-  article.appendChild(expandButton);
+  // 3- structure of the elements
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+  article.appendChild(buttonExpand);
+  article.appendChild(buttonCollapse);
 
-  title.textContent = x.title;
-  date.textContent = x.date;
-  p1.textContent = x.firstParagraph;
-  p2.textContent = x.secondParagraph;
-  p3.textContent = x.thirdParagraph;
-  expandButton.textContent = "click";
+  // 4-  text content
 
-  expandButton.addEventListener("click", () => {
+  articleTitle.textContent = articleInfo.title;
+  articleDate.textContent = articleInfo.date;
+  firstP.textContent = articleInfo.firstParagraph;
+  secondP.textContent = articleInfo.secondParagraph;
+  thirdP.textContent = articleInfo.thirdParagraph;
+  buttonExpand.textContent = "\u25bc";
+  buttonCollapse.textContent = "\u25b2";
+   //style
+   article.style.borderRadius = '20px'
+   article.style.border = '2px solid green';
+   article.style.padding = '20px';
+  //  article.style.margin = '80px 50px 50px 200px ';
+
+  // 5- add event listener 
+  buttonExpand.addEventListener("click", event => {
+    console.log("button clicked", event.target);
+
+    buttonExpand.classList.toggle("hide-btn");
+    buttonCollapse.classList.toggle("hide-btn");
+
     article.classList.toggle("article-open");
-  })
+  });
 
+  buttonCollapse.addEventListener("click", event => {
+    console.log("button clicked", event.target);
+
+    buttonCollapse.classList.toggle("hide-btn");
+    buttonExpand.classList.toggle("hide-btn");
+
+    article.classList.toggle("article-open");
+  });
+  //  6- return component
   return article;
 }
+// 7-  map over data & create a new object
 
 const articles = document.querySelector(".articles");
-data.forEach( x => {articles.appendChild(articleCreator(x))})
 
+data.push({
+  title: "Javier Gutierez",
+  date: "sep 8th ,1986",
+  firstParagraph: "Javier Found Lambda School ",
+  secondParagraph: "Even  it was hard ",
+  thirdParagraph: "he kept on going ! ",
+});
 
+data.forEach(obj => {
+  articles.appendChild(articleCreator(obj));
+});
