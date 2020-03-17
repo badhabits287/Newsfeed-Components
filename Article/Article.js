@@ -100,7 +100,7 @@ const data = [
   </div>
 
   Hint: You will need to use createElement more than once here!
-
+z
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
@@ -112,3 +112,66 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+function articleCreator(articleInfo) {
+  // 1-  def new elements
+  const article = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
+  const expandBtn = document.createElement("p");
+  // 2-   class names
+  article.classList.add("article");
+  articleDate.classList.add("date");
+  expandBtn.classList.add("expandButton");
+
+  // 3- structure of the elements
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+  article.appendChild(expandBtn);
+
+  // 4-  text content
+
+  articleTitle.textContent = articleInfo.title;
+  articleDate.textContent = articleInfo.date;
+  firstP.textContent = articleInfo.firstParagraph;
+  secondP.textContent = articleInfo.secondParagraph;
+  thirdP.textContent = articleInfo.thirdParagraph;
+  expandBtn.textContent = "Expand";
+   //style
+   article.style.borderRadius = '20px'
+   article.style.border = '2px solid green';
+   article.style.padding = '20px';
+   article.style.margin = '80px 50px 50px 200px ';
+
+  // 5- add event listener 
+  expandBtn.addEventListener("click", () => {
+    article.classList.toggle("article-open");
+
+    console.log('click');
+  });
+
+  //  6- return component
+  return article;
+}
+// 7-  map over data & create a new object
+
+
+data.push({
+  title: "Javier Gutierez",
+  date: "sep 8th ,1986",
+  firstParagraph: "Lambda School",
+  secondParagraph: "blah blah blah",
+  thirdParagraph: "blah blah blah",
+});
+
+const articles = document.querySelector(".articles");
+data.forEach(obj => {
+  articles.appendChild(articleCreator(obj));
+});
