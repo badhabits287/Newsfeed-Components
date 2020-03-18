@@ -32,38 +32,40 @@ let menuItems = [
 
   Step 6: add the menu component to the DOM.
   
-*/
+// */
+// // attempt 2 
+// const createMenu = menuItems => {
+//   const menu = document.createElement('div');
+//   const ul = document.createElement('ul');
 
-const createMenu = menuItems => {
-  const menu = document.createElement('div');
-  const ul = document.createElement('ul');
+//   menuItems.forEach(el => {
+//     let item = document.createElement('li');
+//     item.textContent = el;
+//     ul.appendChild(item);
+//   });
 
-  menuItems.forEach(el => {
-    let item = document.createElement('li');
-    item.textContent = el;
-    ul.appendChild(item);
-  });
+//   menu.classList.add('menu');
 
-  menu.classList.add('menu');
-
-  menu.appendChild(ul);
+//   menu.appendChild(ul);
 
 
 
-  const menuBtn = document.querySelector('.menu-button');
-  menuBtn.addEventListener('click', () => {
-    menu.classList.contains('menu--open');
+//   const menuBtn = document.querySelector('.menu-button');
+//   menuBtn.addEventListener('click', () => {
+//     menu.classList.contains('menu--open');
 
-    menu.classList.toggle('menu--open');
-  });
+//     menu.classList.toggle('menu--open');
+//   });
 
-  return menu;
-};
+//   return menu;
+// };
 
-const header = document.querySelector('.header');
+// const header = document.querySelector('.header');
 
-header.appendChild(createMenu(menuItems));
+// header.appendChild(createMenu(menuItems));
 
+
+// attempt 1 
 // function menuCreate(menuData) {
 //   // 1-  def new elements
 //   const menu = document.createElement('div')

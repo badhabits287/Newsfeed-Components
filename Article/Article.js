@@ -113,50 +113,99 @@ z
 
 */
 
+function articleCreator(obj) {
 
-function articleCreator(articleInfo) {
+
   // 1-  def new elements
   const article = document.createElement("div");
+  const articleBar = document.createElement('div')
   const articleTitle = document.createElement("h2");
   const articleDate = document.createElement("p");
+  const articleContent = document.createElement("div");
   const firstP = document.createElement("p");
   const secondP = document.createElement("p");
   const thirdP = document.createElement("p");
-  const expandBtn = document.createElement("p");
-  // 2-   class names
-  article.classList.add("article");
-  articleDate.classList.add("date");
-  expandBtn.classList.add("expandButton");
 
-  // 3- structure of the elements
+
+  const articleButtons = document.createElement('div')
+  const btnOpen = document.createElement('button')
+  const btnClose = document.createElement('button')
+
+
+
+  // 2- structure of the elements
+  article.appendChild(articleBar)
   article.appendChild(articleTitle);
   article.appendChild(articleDate);
-  article.appendChild(firstP);
-  article.appendChild(secondP);
-  article.appendChild(thirdP);
-  article.appendChild(expandBtn);
+
+  articleBar.appendChild(articleButtons)
+  articleButtons.appendChild(btnOpen)
+  articleButtons.appendChild(btnClose)
+
+  // 3-   class names
+  article.classList.add("article");
+  articleBar.classList.add('article-bar')
+  articleDate.classList.add("date");
+  articleContent.classList.add('articleC')
+  articleButtons.classList.add('article-buttons')
+  btnOpen.classList.add('article-btn-open')
+  btnClose.classList.add('article-btn-close', 'hide-btn')
+
 
   // 4-  text content
 
-  articleTitle.textContent = articleInfo.title;
-  articleDate.textContent = articleInfo.date;
-  firstP.textContent = articleInfo.firstParagraph;
-  secondP.textContent = articleInfo.secondParagraph;
-  thirdP.textContent = articleInfo.thirdParagraph;
-  expandBtn.textContent = "Expand";
-   //style
-   article.style.borderRadius = '20px'
-   article.style.border = '2px solid green';
-   article.style.padding = '20px';
-   article.style.margin = '80px 50px 50px 200px ';
 
+  articleTitle.textContent = obj.title;
+  articleDate.textContent = obj.date;
+
+  firstP.textContent = obj.firstParagraph;
+  secondP.textContent = obj.secondParagraph;
+  thirdP.textContent = obj.thirdParagraph;
+  // add content inside of buttons & text elements
+  const open = '\u25bc' // unicode triangle
+  btnOpen.textContent = open
+
+  const close = '\u25b2'
+  btnClose.textContent = close
+
+
+  //style
+  article.style.background = 'dodgerBlue';
+  article.style.borderRadius = '20px';
+  article.style.border = '2px solid green';
+  article.style.padding = '20px';
+  article.style.margin = '80px 50px 50px 200px ';
+  articleTitle.style.border = '2px solid green';
+  articleTitle.style.margin = '20px';
+  articleTitle.style.padding = '20px';
+  articleTitle.style.borderRadius = '20px';
+  articleTitle.style.background = 'white';
+  articleDate.style.background = 'lightBlue';
+  articleDate.style.borderRadius = '20px';
+  
+  articleDate.style.padding = '20px';
+  articleDate.style.margin = '20px';
   // 5- add event listener 
-  expandBtn.addEventListener("click", () => {
-    article.classList.toggle("article-open");
 
-    console.log('click');
-  });
+  btnOpen.addEventListener('click', () => {
+    console.log('open')
+  
+    article.appendChild(firstP);
+    article.appendChild(secondP);
+    article.appendChild(thirdP);
+    //   console.log('clicked')
+    //   btnOpen.classList.toggle('btn-open')
+    //   btnClose.classList.toggle('btn-close')
+    //  articleContent.classList.toggle('article-open')
+  })
 
+  btnClose.addEventListener('click', () => {
+    console.log('close')
+  
+    article.removeChild(firstP);
+    article.removeChild(secondP);
+    article.removeChild(thirdP);
+  })
   //  6- return component
   return article;
 }
@@ -170,8 +219,14 @@ data.push({
   secondParagraph: "blah blah blah",
   thirdParagraph: "blah blah blah",
 });
-
+// data.forEach(data => {
+//   let newArticle = articleCreator(data);
+//   const articles = document.querySelector('.articles');
+//   articles.appendChild(newArticle);
+// })
 const articles = document.querySelector(".articles");
 data.forEach(obj => {
   articles.appendChild(articleCreator(obj));
 });
+
+
