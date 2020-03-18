@@ -100,7 +100,7 @@ const data = [
   </div>
 
   Hint: You will need to use createElement more than once here!
-
+z
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
@@ -112,3 +112,122 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleCreator(obj) {
+
+
+  // 1-  def new elements
+  const article = document.createElement("div");
+  const articleBar = document.createElement('div')
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const articleContent = document.createElement("div");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
+
+
+  const articleButtons = document.createElement('div')
+  const btnOpen = document.createElement('button')
+  const btnClose = document.createElement('button')
+
+
+
+  // 2- structure of the elements
+  article.appendChild(articleBar)
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+
+  articleBar.appendChild(articleButtons)
+  articleButtons.appendChild(btnOpen)
+  articleButtons.appendChild(btnClose)
+
+  // 3-   class names
+  article.classList.add("article");
+  articleBar.classList.add('article-bar')
+  articleDate.classList.add("date");
+  articleContent.classList.add('articleC')
+  articleButtons.classList.add('article-buttons')
+  btnOpen.classList.add('article-btn-open')
+  btnClose.classList.add('article-btn-close', 'hide-btn')
+
+
+  // 4-  text content
+
+
+  articleTitle.textContent = obj.title;
+  articleDate.textContent = obj.date;
+
+  firstP.textContent = obj.firstParagraph;
+  secondP.textContent = obj.secondParagraph;
+  thirdP.textContent = obj.thirdParagraph;
+  // add content inside of buttons & text elements
+  const open = '\u25bc' // unicode triangle
+  btnOpen.textContent = open
+
+  const close = '\u25b2'
+  btnClose.textContent = close
+
+
+  //style
+  
+  article.style.background = 'dodgerBlue';
+  article.style.borderRadius = '20px';
+  article.style.border = '2px solid green';
+  article.style.padding = '5px';
+  article.style.margin = '10px ';
+  articleTitle.style.border = '2px solid green';
+  articleTitle.style.margin = '20px';
+  articleTitle.style.padding = '20px';
+  articleTitle.style.borderRadius = '20px';
+  articleTitle.style.background = 'white';
+  articleDate.style.background = 'lightBlue';
+  articleDate.style.borderRadius = '20px';
+  
+  articleDate.style.padding = '20px';
+  articleDate.style.margin = '20px';
+  // 5- add event listener 
+
+  btnOpen.addEventListener('click', () => {
+    console.log('open')
+    
+    article.appendChild(firstP);
+    article.appendChild(secondP);
+    article.appendChild(thirdP);
+   
+  })
+  btnOpen.style.transition = "all 2s";
+  btnOpen.style.animation = "mynewmove 4s 2"
+
+
+  btnClose.addEventListener('click', () => {
+    console.log('close')
+  
+    article.removeChild(firstP);
+    article.removeChild(secondP);
+    article.removeChild(thirdP);
+  })
+  //  6- return component
+  return article;
+}
+// 7-  map over data & create a new object
+
+
+data.push({
+  title: "Javier Gutierez",
+  date: "sep 8th ,1986",
+  firstParagraph: "Lambda School",
+  secondParagraph: "blah blah blah",
+  thirdParagraph: "blah blah blah",
+});
+// data.forEach(data => {
+//   let newArticle = articleCreator(data);
+//   const articles = document.querySelector('.articles');
+//   articles.appendChild(newArticle);
+// })
+const articles = document.querySelector(".articles");
+data.forEach(obj => {
+  articles.appendChild(articleCreator(obj));
+});
+
+

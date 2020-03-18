@@ -32,4 +32,50 @@ let menuItems = [
 
   Step 6: add the menu component to the DOM.
   
-*/
+// */
+// // attempt 2 
+
+const header = document.querySelector('.header');
+const menuButton = document.querySelector('.menu-button');
+const body = document.querySelector('body');
+body.style.background = 'grey';
+header.style.color = ' black';
+header.style.marginLeft = '200px';
+
+
+function openMenu(arr) {
+
+  const nav = document.createElement('nav');
+  const list = document.createElement('ul');
+  nav.style.color = 'Black';
+  nav.style.width = '200px';
+  nav.style.border = '2px solid white';
+  nav.style.borderRadius = ' 20px';
+  
+
+  menuItems.forEach((link) => {
+    const item = document.createElement('nav');
+    item.style.borderRadius = ' 20px';
+    item.style.border = '1px solid white';
+    item.style.padding = '10px';
+    item.style.margin = '10px';
+    item.textContent = link;
+    list.append(item);
+    item.style.cursor = 'pointer';
+  })
+
+  nav.classList.add('.menu');
+
+
+  menuButton.addEventListener('mouseover', (e) => {
+    nav.appendChild(list);
+
+  })
+  nav.addEventListener('mouseleave', (e) => {
+    nav.removeChild(list);
+  })
+  return nav;
+
+}
+
+header.append(openMenu(menuItems));
