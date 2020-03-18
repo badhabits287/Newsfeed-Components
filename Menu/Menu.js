@@ -34,56 +34,48 @@ let menuItems = [
   
 // */
 // // attempt 2 
-// const createMenu = menuItems => {
-//   const menu = document.createElement('div');
-//   const ul = document.createElement('ul');
 
-//   menuItems.forEach(el => {
-//     let item = document.createElement('li');
-//     item.textContent = el;
-//     ul.appendChild(item);
-//   });
-
-//   menu.classList.add('menu');
-
-//   menu.appendChild(ul);
+const header = document.querySelector('.header');
+const menuButton = document.querySelector('.menu-button');
+const body = document.querySelector('body');
+body.style.background = 'grey';
+header.style.color = ' black';
+header.style.marginLeft = '200px';
 
 
+function openMenu(arr) {
 
-//   const menuBtn = document.querySelector('.menu-button');
-//   menuBtn.addEventListener('click', () => {
-//     menu.classList.contains('menu--open');
+  const nav = document.createElement('nav');
+  const list = document.createElement('ul');
+  nav.style.color = 'Black';
+  nav.style.width = '200px';
+  nav.style.border = '2px solid white';
+  nav.style.borderRadius = ' 20px';
+  
 
-//     menu.classList.toggle('menu--open');
-//   });
+  menuItems.forEach((link) => {
+    const item = document.createElement('nav');
+    item.style.borderRadius = ' 20px';
+    item.style.border = '1px solid white';
+    item.style.padding = '10px';
+    item.style.margin = '10px';
+    item.textContent = link;
+    list.append(item);
+    item.style.cursor = 'pointer';
+  })
 
-//   return menu;
-// };
-
-// const header = document.querySelector('.header');
-
-// header.appendChild(createMenu(menuItems));
+  nav.classList.add('.menu');
 
 
-// attempt 1 
-// function menuCreate(menuData) {
-//   // 1-  def new elements
-//   const menu = document.createElement('div')
-//   menu.classList.add ('menu');
-//   const list = document.createElement('ul');
-//   const menuButton = document.querySelector('.menu-button');
-//   // 2-   class names
-//   menuButton.classList.add('menu-button');
-//   // 3- structure of the elements
-//   menu.append(list);
-//   // 3- loop to create menu elements 
-//   menuData.forEach(info => {
-//     const menuItems = document.createElement('li');
-//     menuItems.textContent = info;
-//     list.append(menuItems);
-//   });
-//   // 5- add event listener 
-//   menuButton.addEventListener("click", () => {
-//     console.log("clicked", event.target);
-//     menu.classList.toggle('menu--open');
-//   });}
+  menuButton.addEventListener('mouseover', (e) => {
+    nav.appendChild(list);
+
+  })
+  nav.addEventListener('mouseleave', (e) => {
+    nav.removeChild(list);
+  })
+  return nav;
+
+}
+
+header.append(openMenu(menuItems));

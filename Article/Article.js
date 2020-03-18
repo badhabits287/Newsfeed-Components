@@ -170,11 +170,12 @@ function articleCreator(obj) {
 
 
   //style
+  
   article.style.background = 'dodgerBlue';
   article.style.borderRadius = '20px';
   article.style.border = '2px solid green';
-  article.style.padding = '20px';
-  article.style.margin = '80px 50px 50px 200px ';
+  article.style.padding = '5px';
+  article.style.margin = '10px ';
   articleTitle.style.border = '2px solid green';
   articleTitle.style.margin = '20px';
   articleTitle.style.padding = '20px';
@@ -189,15 +190,15 @@ function articleCreator(obj) {
 
   btnOpen.addEventListener('click', () => {
     console.log('open')
-  
+    
     article.appendChild(firstP);
     article.appendChild(secondP);
     article.appendChild(thirdP);
-    //   console.log('clicked')
-    //   btnOpen.classList.toggle('btn-open')
-    //   btnClose.classList.toggle('btn-close')
-    //  articleContent.classList.toggle('article-open')
+   
   })
+  btnOpen.style.transition = "all 2s";
+  btnOpen.style.animation = "mynewmove 4s 2"
+
 
   btnClose.addEventListener('click', () => {
     console.log('close')
